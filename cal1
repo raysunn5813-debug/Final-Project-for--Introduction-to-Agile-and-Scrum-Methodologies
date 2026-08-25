@@ -1,0 +1,11 @@
+def firstCalculation(a: int, b: int) -> None:
+    """
+    Performs a mathematical computation (addition) on two integers
+    and renders the result to the console.
+    """
+    result = a + b
+    print(f"The result of the calculation is: {result}")
+
+if __name__ == "__main__":
+    # Executing a test to ensure it is correct
+    firstCalculation(15, 27)
