@@ -1,0 +1,73 @@
+import os
+
+def firstCalculation(a: int, b: int) -> None:
+    """
+    Performs a mathematical computation (addition) on two integers
+    and renders the result to the console.
+    """
+    result = a + b
+    print(f"The result of the first calculation (addition) is: {result}")
+
+def secondCalculation(a: int, b: int) -> None:
+    """
+    Performs a mathematical computation (multiplication) on two integers
+    and renders the result to the console. Differs from firstCalculation.
+    """
+    result = a * b
+    print(f"The result of the second calculation (multiplication) is: {result}")
+
+def menu() -> int:
+    """
+    Clears the screen, displays a five-option menu, and returns the 
+    user's selection as an integer.
+    """
+    # Clear the screen based on the operating system
+    os.system('cls' if os.name == 'nt' else 'clear')
+    
+    print("--- Main Menu ---")
+    print("1. Option One")
+    print("2. Option Two")
+    print("3. Option Three")
+    print("4. Option Four")
+    print("5. Option Five")
+    print("-----------------")
+    
+    # Loop until a valid integer is provided
+    while True:
+        try:
+            selection = int(input("Please select an option (1-5): "))
+            return selection
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
+
+def writeToFile(filename: str, content: str) -> None:
+    """
+    Writes the provided string content to a specified file. 
+    Includes error handling if the file cannot be opened.
+    """
+    try:
+        # The 'w' mode opens the file for writing, creating it if it doesn't exist
+        # and truncating it if it does.
+        with open(filename, 'w', encoding='utf-8') as file:
+            file.write(content)
+        print(f"Information successfully outputted to {filename}")
+    except IOError as e:
+        # Catches issues like permission denied or invalid paths
+        print(f"Error: The file '{filename}' could not be opened. Details: {e}")
+
+if __name__ == "__main__":
+    # 1. Test the calculation functions
+    print("--- Running Calculations ---")
+    firstCalculation(15, 27)
+    secondCalculation(15, 27)
+    
+    # 2. Test the file writing function
+    print("\n--- Testing File Output ---")
+    writeToFile("coding.txt", "This is the outputted information from the application.")
+    
+    # 3. Pause before clearing the screen for the menu
+    input("\nPress Enter to launch the menu...")
+    
+    # 4. Test the menu function
+    selected_option = menu()
+    print(f"\nFunction returned integer: {selected_option}")
