@@ -1,0 +1,85 @@
+import os
+
+def firstCalculation(a: int, b: int) -> None:
+    """
+    Performs a mathematical computation (addition) on two integers
+    and renders the result to the console.
+    """
+    result = a + b
+    print(f"The result of the first calculation (addition) is: {result}")
+
+def secondCalculation(a: int, b: int) -> None:
+    """
+    Performs a mathematical computation (multiplication) on two integers
+    and renders the result to the console. Differs from firstCalculation.
+    """
+    result = a * b
+    print(f"The result of the second calculation (multiplication) is: {result}")
+
+def menu() -> int:
+    """
+    Clears the screen, displays a five-option menu, and returns the 
+    user's selection as an integer.
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
+    
+    print("--- Main Menu ---")
+    print("1. Option One")
+    print("2. Option Two")
+    print("3. Option Three")
+    print("4. Option Four")
+    print("5. Option Five")
+    print("-----------------")
+    
+    while True:
+        try:
+            selection = int(input("Please select an option (1-5): "))
+            return selection
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
+
+def writeToFile(filename: str, content: str) -> None:
+    """
+    Writes the provided string content to a specified file. 
+    Includes error handling if the file cannot be opened.
+    """
+    try:
+        with open(filename, 'w', encoding='utf-8') as file:
+            file.write(content)
+        print(f"Information successfully outputted to {filename}")
+    except IOError as e:
+        print(f"Error: The file '{filename}' could not be opened. Details: {e}")
+
+def readFromFile(filename: str) -> str:
+    """
+    Reads a file so that information can be retrieved.
+    Handles FileNotFoundError and general IOErrors safely.
+    """
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            content = file.read()
+        print(f"Information successfully retrieved from {filename}:")
+        print(content)
+        return content
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found. Please ensure it exists.")
+        return ""
+    except IOError as e:
+        print(f"Error: Could not read the file '{filename}'. Details: {e}")
+        return ""
+
+if __name__ == "__main__":
+    print("--- Running Calculations ---")
+    firstCalculation(15, 27)
+    secondCalculation(15, 27)
+    
+    print("\n--- Testing File Output ---")
+    test_file = "coding.txt"
+    writeToFile(test_file, "This is the outputted information from the application.")
+    
+    print("\n--- Testing File Retrieval ---")
+    retrieved_data = readFromFile(test_file)
+    
+    input("\nPress Enter to launch the menu...")
+    selected_option = menu()
+    print(f"\nFunction returned integer: {selected_option}")
